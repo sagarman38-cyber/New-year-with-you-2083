@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Rupa ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Stars background */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Center text */
+.container {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    letter-spacing: 2px;
+}
+
+#text {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+/* Button */
+button {
+    margin-top: 30px;
+    padding: 12px 25px;
+    font-size: 16px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+/* Fade effect */
+.fade {
+    animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container fade">
+    <h1>Happy New Year, Babe ❤️</h1>
+    <div id="text"></div>
+    <button onclick="startExperience()">Start Our Story 🎬</button>
+</div>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* 🌟 Star background */
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+for (let i = 0; i < 200; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2
+    });
+}
+
+function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+
+    stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* 🎬 Typing cinematic text */
+const lines = [
+    "In the story of my life...",
+    "there is one person who changed everything.",
+    "Her name is Rupa ❤️",
+    "Every moment with you feels like magic.",
+    "And in this new year...",
+    "I promise to love you more and more.",
+    "Forever starts with you 💕"
+];
+
+let i = 0;
+let j = 0;
+
+function typeEffect() {
+    if (i < lines.length) {
+        if (j < lines[i].length) {
+            document.getElementById("text").innerHTML += lines[i].charAt(j);
+            j++;
+            setTimeout(typeEffect, 50);
+        } else {
+            document.getElementById("text").innerHTML += "<br><br>";
+            i++;
+            j = 0;
+            setTimeout(typeEffect, 800);
+        }
+    }
+}
+
+/* ▶️ Start experience */
+function startExperience() {
+    document.getElementById("music").play();
+    document.getElementById("text").innerHTML = "";
+    typeEffect();
+}
+</script>
+
+</body>
+</html>
